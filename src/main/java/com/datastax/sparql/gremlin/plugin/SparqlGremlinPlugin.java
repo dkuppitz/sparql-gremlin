@@ -32,7 +32,7 @@ import java.util.Optional;
  */
 public class SparqlGremlinPlugin extends AbstractGremlinPlugin {
 
-    final static String NAME = "datastax.sparql-gremlin";
+    final static String NAME = "datastax.sparql";
 
     @Override
     public String getName() {
