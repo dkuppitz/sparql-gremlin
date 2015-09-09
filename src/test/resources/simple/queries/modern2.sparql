@@ -1,0 +1,9 @@
+SELECT *
+WHERE {
+  ?a ::label "person" .
+  ?a knows ?b .
+  ?a created ?c .
+  ?b created ?c .
+  ?a ::age ?d .
+    FILTER (?d < 30)
+}
