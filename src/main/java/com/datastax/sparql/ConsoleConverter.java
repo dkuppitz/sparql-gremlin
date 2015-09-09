@@ -49,7 +49,6 @@ class ConsoleConverter {
     public static void main(final String[] args) throws IOException {
 
         final Options options = new Options();
-        options.addOption("s", "simple", false, "parse simple query syntax");
         options.addOption("f", "file", true, "a file that contains a SPARQL query");
         options.addOption("g", "graph", true, "the graph that's used to execute the query [classic|modern|crew|kryo file]");
         // TODO: add an OLAP option (perhaps: "--olap spark"?)
@@ -65,7 +64,6 @@ class ConsoleConverter {
             return;
         }
 
-        final boolean parseSimple = commandLine.hasOption("simple");
         final InputStream inputStream = commandLine.hasOption("file")
                 ? new FileInputStream(commandLine.getOptionValue("file"))
                 : System.in;
@@ -81,11 +79,9 @@ class ConsoleConverter {
             queryBuilder.append(System.lineSeparator()).append(line);
         }
 
-        final String queryString = parseSimple
-                ? SimpleQueryConverter.convert(queryBuilder.toString())
-                : queryBuilder.toString();
-
+        final String queryString = queryBuilder.toString();
         final Graph graph;
+
         if (commandLine.hasOption("graph")) {
             switch (commandLine.getOptionValue("graph").toLowerCase()) {
                 case "classic":
@@ -108,10 +104,6 @@ class ConsoleConverter {
 
         final Traversal<Vertex, ?> traversal = SparqlToGremlinConverter.convertToGremlinTraversal(graph, queryString);
 
-        if (parseSimple) {
-            printWithHeadline("Simple SPARQL Query", queryBuilder.toString());
-        }
-
         printWithHeadline("SPARQL Query", queryString);
         printWithHeadline("Traversal (prior execution)", traversal);
         printWithHeadline("Result", String.join(System.lineSeparator(),
@@ -123,8 +115,10 @@ class ConsoleConverter {
         final Map<String, String> env = System.getenv();
         final String command = env.containsKey("LAST_COMMAND") ? env.get("LAST_COMMAND") : "sparql-gremlin.sh";
         printWithHeadline("Usage Examples", String.join("\n",
-                command + " -s < examples/simple/query1.sparql",
-                command + " -f examples/sparql/query1.sparql"));
+                command + " -f examples/modern1.sparql",
+                command + " < examples/modern2.sparql",
+                command + " <<< 'SELECT * WHERE { ?a e:knows ?b }'",
+                command + " -g crew < examples/crew1.sparql"));
         if (exitCode >= 0) {
             System.exit(exitCode);
         }

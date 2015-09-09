@@ -141,28 +141,10 @@
                             <goal>copy-resources</goal>
                         </goals>
                         <configuration>
-                            <outputDirectory>${basedir}/examples/sparql</outputDirectory>
+                            <outputDirectory>${basedir}/examples</outputDirectory>
                             <resources>
                                 <resource>
-                                    <directory>${project.basedir}/src/test/resources/sparql/queries</directory>
-                                    <includes>
-                                        <include>*.sparql</include>
-                                    </includes>
-                                </resource>
-                            </resources>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>copy-simple-queries</id>
-                        <phase>compile</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${basedir}/examples/simple</outputDirectory>
-                            <resources>
-                                <resource>
-                                    <directory>${project.basedir}/src/test/resources/simple/queries</directory>
+                                    <directory>${project.basedir}/src/test/resources/queries</directory>
                                     <includes>
                                         <include>*.sparql</include>
                                     </includes>

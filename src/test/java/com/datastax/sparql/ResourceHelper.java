@@ -30,11 +30,7 @@ import java.io.InputStream;
 public class ResourceHelper {
 
     public static String loadQuery(final String prefix, final int number) throws IOException {
-        return loadQuery("sparql", prefix, number);
-    }
-
-    public static String loadQuery(final String type, final String prefix, final int number) throws IOException {
-        final String path = "/" + type + "/queries/" + prefix + number + ".sparql";
+        final String path = "/queries/" + prefix + number + ".sparql";
         final InputStream stream = ResourceHelper.class.getResourceAsStream(path);
         return IOUtils.toString(stream, "UTF-8");
     }
