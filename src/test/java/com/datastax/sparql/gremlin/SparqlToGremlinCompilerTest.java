@@ -32,7 +32,7 @@ import org.junit.Test;
 import java.io.IOException;
 
 import static com.datastax.sparql.ResourceHelper.loadQuery;
-import static com.datastax.sparql.gremlin.SparqlToGremlinConverter.convertToGremlinTraversal;
+import static com.datastax.sparql.gremlin.SparqlToGremlinCompiler.convertToGremlinTraversal;
 import static org.apache.tinkerpop.gremlin.process.traversal.P.gt;
 import static org.apache.tinkerpop.gremlin.process.traversal.P.lt;
 import static org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.GraphTraversalSource.computer;
@@ -41,7 +41,7 @@ import static org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.__.as;
 import static org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.__.or;
 import static org.junit.Assert.assertEquals;
 
-public class SparqlToGremlinConverterTest {
+public class SparqlToGremlinCompilerTest {
 
     private Graph modern, crew;
     private GraphTraversalSource mg, cg;

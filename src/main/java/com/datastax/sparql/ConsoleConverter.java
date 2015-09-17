@@ -19,7 +19,7 @@
 
 package com.datastax.sparql;
 
-import com.datastax.sparql.gremlin.SparqlToGremlinConverter;
+import com.datastax.sparql.gremlin.SparqlToGremlinCompiler;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
@@ -102,7 +102,7 @@ class ConsoleConverter {
             graph = TinkerFactory.createModern();
         }
 
-        final Traversal<Vertex, ?> traversal = SparqlToGremlinConverter.convertToGremlinTraversal(graph, queryString);
+        final Traversal<Vertex, ?> traversal = SparqlToGremlinCompiler.convertToGremlinTraversal(graph, queryString);
 
         printWithHeadline("SPARQL Query", queryString);
         printWithHeadline("Traversal (prior execution)", traversal);

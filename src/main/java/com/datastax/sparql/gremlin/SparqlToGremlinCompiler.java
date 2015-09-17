@@ -42,15 +42,15 @@ import java.util.List;
  * @author Daniel Kuppitz (http://gremlin.guru)
  */
 // TODO: implement OpVisitor, don't extend OpVisitorBase
-public class SparqlToGremlinConverter extends OpVisitorBase {
+public class SparqlToGremlinCompiler extends OpVisitorBase {
 
     private GraphTraversal<Vertex, ?> traversal;
 
-    private SparqlToGremlinConverter(final GraphTraversal<Vertex, ?> traversal) {
+    private SparqlToGremlinCompiler(final GraphTraversal<Vertex, ?> traversal) {
         this.traversal = traversal;
     }
 
-    private SparqlToGremlinConverter(final GraphTraversalSource g) {
+    private SparqlToGremlinCompiler(final GraphTraversalSource g) {
         this(g.V());
     }
 
@@ -93,7 +93,7 @@ public class SparqlToGremlinConverter extends OpVisitorBase {
     }
 
     private static GraphTraversal<Vertex, ?> convertToGremlinTraversal(final GraphTraversalSource g, final Query query) {
-        return new SparqlToGremlinConverter(g).convertToGremlinTraversal(query);
+        return new SparqlToGremlinCompiler(g).convertToGremlinTraversal(query);
     }
 
     public static GraphTraversal<Vertex, ?> convertToGremlinTraversal(final Graph graph, final String query) {

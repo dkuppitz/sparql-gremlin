@@ -19,7 +19,7 @@
 
 package com.datastax.sparql.gremlin.plugin;
 
-import com.datastax.sparql.gremlin.SparqlToGremlinConverter;
+import com.datastax.sparql.gremlin.SparqlToGremlinCompiler;
 import org.apache.tinkerpop.gremlin.groovy.plugin.RemoteAcceptor;
 import org.apache.tinkerpop.gremlin.groovy.plugin.RemoteException;
 import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.GraphTraversalSource;
@@ -51,7 +51,7 @@ public class SparqlRemoteAcceptor implements RemoteAcceptor {
         } else {
             this.g = (GraphTraversalSource) graphOrTraversalSource;
         }
-        return null;
+        return this;
     }
 
     @Override
@@ -63,7 +63,7 @@ public class SparqlRemoteAcceptor implements RemoteAcceptor {
     public Object submit(final List<String> args) throws RemoteException {
         try {
             final String query = RemoteAcceptor.getScript(String.join(" ", args), this.shell);
-            return SparqlToGremlinConverter.convertToGremlinTraversal(this.g, query);
+            return SparqlToGremlinCompiler.convertToGremlinTraversal(this.g, query);
         } catch (final Exception e) {
             throw new RemoteException(e);
         }
@@ -71,5 +71,10 @@ public class SparqlRemoteAcceptor implements RemoteAcceptor {
 
     @Override
     public void close() {
+    }
+
+    @Override
+    public String toString() {
+        return "SPARQL[" + this.g + "]";
     }
 }
