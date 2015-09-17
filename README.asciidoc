@@ -18,7 +18,7 @@ The project contains a console application that can be used to compile SPARQL qu
 Gremlin Shell Plugin
 ~~~~~~~~~~~~~~~~~~~~
 
-To use Gremlin-SPARQL as a Gremlin shell plugin, run the following commands (be sure sparql-gremlin-xyz.jar is in the classpath):
+To use Gremlin-SPARQL as a Gremlin shell plugin, run the following commands (be sure `sparql-gremlin-xyz.jar` is in the classpath):
 
 [source]
 ----
