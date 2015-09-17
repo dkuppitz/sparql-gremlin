@@ -44,7 +44,7 @@ import java.util.stream.Collectors;
 /**
  * @author Daniel Kuppitz (http://gremlin.guru)
  */
-class ConsoleConverter {
+class ConsoleCompiler {
 
     public static void main(final String[] args) throws IOException {
 
