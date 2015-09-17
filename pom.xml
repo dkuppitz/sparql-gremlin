@@ -26,7 +26,7 @@
     <groupId>com.datastax</groupId>
     <artifactId>sparql-gremlin</artifactId>
     <version>0.1</version>
-
+    <name>SPARQL-Gremlin: Compiler for SPARQL to the Gremlin Traversal Machine</name>
     <organization>
         <name>DataStax</name>
         <url>http://www.datastax.com/</url>
@@ -91,7 +91,15 @@
     </dependencies>
 
     <build>
-        <plugins>
+     <directory>${basedir}/target</directory>
+        <finalName>${project.artifactId}-${project.version}</finalName>
+        <resources>
+            <resource>
+                <directory>${basedir}/src/main/resources
+                </directory>
+            </resource>
+        </resources>    
+     <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -159,6 +167,63 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>2.4</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <attach>true</attach>
+                    <descriptors>
+                        <descriptor>src/assembly/standalone.xml</descriptor>
+                        <descriptor>src/assembly/distribution.xml</descriptor>
+                    </descriptors>
+                    <finalName>${project.artifactId}-${project.version}</finalName>
+                    <outputDirectory>target</outputDirectory>
+                    <workDirectory>target/assembly/work</workDirectory>
+                    <tarLongFileMode>warn</tarLongFileMode>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>${javadoc-plugin.version}</version>
+                <configuration>
+                    <additionalparam>-Xdoclint:none</additionalparam>
+                </configuration>
+                <reportSets>
+                    <reportSet>
+                        <id>non-aggregate</id>
+                        <configuration>
+                            <additionalparam>-Xdoclint:none</additionalparam>
+                            <includeDependencySources>true</includeDependencySources>
+                        </configuration>
+                        <reports>
+                            <report>javadoc</report>
+                        </reports>
+                    </reportSet>
+                    <reportSet>
+                        <id>aggregate</id>
+                        <configuration>
+                            <additionalparam>-Xdoclint:none</additionalparam>
+                            <includeDependencySources>true</includeDependencySources>
+                        </configuration>
+                        <reports>
+                            <report>aggregate</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+            </plugin>
+        </plugins>
+    </reporting>
 </project>
