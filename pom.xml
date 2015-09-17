@@ -109,7 +109,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>com.datastax.sparql.ConsoleConverter</mainClass>
+                            <mainClass>com.datastax.sparql.ConsoleCompiler</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
