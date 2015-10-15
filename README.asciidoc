@@ -54,6 +54,13 @@ SPARQL-Gremlin supports the following prefixes to traverse the graph:
 |`v:<name>`  |property-value traversal
 |=================
 
+Note that element IDs and labels are treated like normal properties, hence they can be accessed using the same pattern:
+
+[source]
+----
+SELECT ?name ?id ?label WHERE { ?element v:name ?name . ?element v:id ?id . ?element v:label ?label }
+----
+
 Examples
 --------
 
